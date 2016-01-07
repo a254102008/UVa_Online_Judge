@@ -1,3 +1,8 @@
+/*******************************************************/
+/* UVa 483-Word Scramble                               */
+/* Author: Ching-Yang-Hsieh                            */
+/* Version: 2015/12/21                                 */
+/*******************************************************/
 #include <iostream>
 #include <cstdio>
 using namespace std;
