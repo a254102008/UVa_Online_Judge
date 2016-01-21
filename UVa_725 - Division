@@ -1,0 +1,67 @@
+/********************************************************/
+/* Name        : uva725.cpp								*/
+/* Author      : Ching-Yang-Hsieh  						*/
+/* Version     : 2015/01/21								*/
+/********************************************************/
+#include <cstdio>
+#include <iostream>
+using namespace std;
+int num1,num2;
+int n,a,b,c,d,e,f,g,h,i,j;
+bool fghij(void){
+	int k;
+	e=num1%10;
+	d=(num1/10)%10;
+	c=(num1/100)%10;
+	b=(num1/1000)%10;
+	a=(num1/10000)%10;
+	k=1<<a;
+	k|=1<<b;
+	k|=1<<c;
+	k|=1<<d;
+	k|=1<<e;
+	k|=1<<f;
+	k|=1<<g;
+	k|=1<<h;
+	k|=1<<i;
+	k|=1<<j;
+	return k==1023;
+}
+int main() {
+	bool u,solution,second = false;
+	while(~scanf("%d",&n) && n){
+		if(second)
+			printf("\n");
+		second = u = true;
+		solution = false;
+		for(f = 0;u && f <= 9;++f){
+			for(g = 0;u && g <= 9;++g){
+				if(g==f) continue;
+				for(h = 0;u &&  h<=9;++h){
+					if(h==f || h==g) continue;
+					for(i = 0;u && i<=9;++i){
+						if(i==f || i==g || i==h) continue;
+						for(j = 0;u && j<=9;++j){
+							if(j==f || j==g || j==h || j==i) continue;
+							num2 = j+i*10+h*100+g*1000+f*10000;
+							num1 = n*num2;
+							if(num1<100000){
+								if(fghij()){
+									printf("%d%d%d%d%d / %d%d%d%d%d = %d\n",a,b,c,d,e,f,g,h,i,j,n);
+									solution = true;
+								}
+							}else{
+								u = false;
+							}
+						}
+					}
+				}
+			}
+		}
+		if(!solution){
+			printf("There are no solutions for %d.\n",n);
+		}
+
+	}
+	return 0;
+}
