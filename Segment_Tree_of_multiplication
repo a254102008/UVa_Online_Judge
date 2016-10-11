@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+int n,m;
+int arr[10010];
+int tree[10010<<1];
+void input(){
+	cin>>n>>m;
+	for(int i = 1;i<=n;++i)
+		cin>>arr[i];
+}
+void buile(int r,int l,int now){
+	if(r==l){
+		tree[now] = arr[r];
+		return;
+	}
+	buile(r,(r+l)/2,now<<1);
+	buile((r+l)/2+1,l,(now<<1)|1);
+	tree[now] = tree[now<<1] * tree[(now<<1)|1];
+}
+int q(int L,int R,int now,int l,int r){
+	if( L > r  || R < l || l > r ) return 1;
+	if(l <= L && R <= r){
+		return tree[now];
+	}
+	return q(L,(R+L)/2,now<<1,l,r) *
+		   q((R+L)/2+1,R,(now<<1)|1,l,r);
+}
+void solve(){
+	int r,l,pr,pl;
+	while(m--){
+		cin>>l>>r>>pl>>pr;
+		cout<<q(1,n,1,l,pl-1)*q(1,n,1,pr+1,r)<<endl;
+	}
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+		input();
+		buile(1,n,1);
+		solve();
+	}
+	return 0;
+}
+/*
+2
+5 2
+1 2 3 4 5
+1 5 1 4
+1 4 2 4
+10 1
+2 2 2 2 2 2 2 2 2 2
+1 10 2 9
+*/
