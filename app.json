@@ -1,0 +1,16 @@
+{
+  "name": "UVa_Online_Judge",
+  "description": "",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
